@@ -1,12 +1,42 @@
 import * as React from "react"
 import { useInView } from "react-intersection-observer"
 
+import { Plus } from "akar-icons"
 import { motion, useAnimation } from "framer-motion"
 import Head from "next/head"
+import Link from "next/link"
 
 const Home: React.FC = () => {
   const controls = useAnimation()
   const [ref, inView] = useInView()
+
+  const [bookmarks, setBookmarks] = React.useState([
+    {
+      title: "Portfolio website",
+      link: "https://svg-animations-gallery.vercel.app/",
+      icon: "",
+    },
+    {
+      title: "SVG Animations",
+      link: "https://svg-animations-gallery.vercel.app/",
+      icon: "",
+    },
+    {
+      title: "Portfolio website",
+      link: "https://svg-animations-gallery.vercel.app/",
+      icon: "",
+    },
+    {
+      title: "SVG Animations",
+      link: "https://svg-animations-gallery.vercel.app/",
+      icon: "",
+    },
+    {
+      title: "Portfolio website",
+      link: "https://svg-animations-gallery.vercel.app/",
+      icon: "",
+    },
+  ])
 
   React.useEffect(() => {
     if (inView) {
@@ -24,8 +54,8 @@ const Home: React.FC = () => {
   return (
     <div>
       <Head>
-        <title>Next.js App</title>
-        <meta name="description" content="Next.js Typescript Starter" />
+        <title>Bookmarks</title>
+        <meta name="description" content="An elegant bookmarking tool" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -35,11 +65,37 @@ const Home: React.FC = () => {
         animate={controls}
         variants={variants}
         transition={{ delay: 0, duration: 0.15, type: "spring" }}
-        className="grid h-screen place-content-center"
+        className="flex justify-center pt-20 text-slate-700 md:pt-40"
       >
-        <h1 className="text-center text-8xl font-bold text-zinc-300">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <div className="w-[500px]">
+          <h1 className="mb-1 text-sm text-slate-700">Bookmarks</h1>
+          <div className="group relative flex items-center">
+            <Plus
+              size={15}
+              className="absolute left-3 z-10 text-slate-400 group-hover:text-slate-700"
+            />
+            <input
+              type="text"
+              className="relative w-full rounded bg-slate-200 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
+              placeholder="Inset link, image, or just plain text..."
+            />
+          </div>
+          <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
+          <div className="-mx-2 flex w-full flex-col gap-1">
+            {bookmarks.map((bookmark, index) => (
+              <>
+                <Link
+                  href={bookmark.link}
+                  key={index}
+                  className="flex rounded p-2 text-sm hover:bg-slate-200"
+                >
+                  {bookmark.title}
+                </Link>
+                {index !== bookmarks.length - 1 && <hr />}
+              </>
+            ))}
+          </div>
+        </div>
       </motion.main>
     </div>
   )
