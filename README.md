@@ -1,5 +1,5 @@
 <h1 align="center">
-  Next.js TypeScript Starter
+  An elegant bookmarking tool
 </h1>
 
 ---
