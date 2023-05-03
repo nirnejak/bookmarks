@@ -71,7 +71,7 @@ const Home: React.FC = () => {
           transition={{ duration: 0.15, type: "spring" }}
           className="w-[500px]"
         >
-          <h1 className="mb-2 text-sm text-slate-700">Bookmarks</h1>
+          <h1 className="mb-3 font-semibold text-slate-700">Bookmarks</h1>
           <div className="group relative flex items-center">
             <Plus
               size={15}
@@ -89,9 +89,11 @@ const Home: React.FC = () => {
             />
           </div>
           {bookmarks.length > 0 && (
-            <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
+            <p className="mb-3 mt-10 text-xs font-medium text-slate-500">
+              Inbox
+            </p>
           )}
-          <div className="flex w-full select-none flex-col">
+          <div className="flex w-full select-none flex-col font-[450]">
             <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>
               {bookmarks.map((bookmark) => (
                 <BookmarkRow
