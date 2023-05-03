@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Plus } from "akar-icons"
+import { GithubFill, Plus } from "akar-icons"
 import { motion, Reorder } from "framer-motion"
 import Head from "next/head"
 import { v4 as uuidv4 } from "uuid"
@@ -105,6 +105,12 @@ const Home: React.FC = () => {
           </div>
         </motion.div>
       </main>
+
+      <footer className="fixed bottom-2 right-2 text-slate-700 hover:text-slate-900">
+        <a href="http://github.com/nirnejak/bookmarks/" target="_blank">
+          <GithubFill />
+        </a>
+      </footer>
     </div>
   )
 }
