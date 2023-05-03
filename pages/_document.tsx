@@ -40,6 +40,12 @@ const MyDocument: React.FC = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@nirnejak" />
         <meta name="twitter:site" content="@nirnejak" />
+        {/* Plausible Analytics */}
+        <script
+          defer
+          data-domain="bkmrks.vercel.app"
+          src="https://plausible.io/js/script.js"
+        />
       </Head>
       <body className="overflow-x-hidden bg-slate-50">
         <Main />
