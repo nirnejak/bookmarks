@@ -9,44 +9,20 @@ import { v4 as uuidv4 } from "uuid"
 
 import { getUrlMetadata } from "../utils/getUrlMetadata"
 
+interface BOOKMARK {
+  id: number
+  title: string
+  link: string
+  icon: string
+}
+
 const Home: React.FC = () => {
   const controls = useAnimation()
   const [ref, inView] = useInView()
 
   const [url, setUrl] = React.useState("")
 
-  const [bookmarks, setBookmarks] = React.useState([
-    {
-      id: 1,
-      title: "Portfolio website",
-      link: "https://svg-animations-gallery.vercel.app/",
-      icon: "",
-    },
-    {
-      id: 2,
-      title: "SVG Animations",
-      link: "https://svg-animations-gallery.vercel.app/",
-      icon: "",
-    },
-    {
-      id: 3,
-      title: "Portfolio website",
-      link: "https://svg-animations-gallery.vercel.app/",
-      icon: "",
-    },
-    {
-      id: 4,
-      title: "SVG Animations",
-      link: "https://svg-animations-gallery.vercel.app/",
-      icon: "",
-    },
-    {
-      id: 5,
-      title: "Portfolio website",
-      link: "https://svg-animations-gallery.vercel.app/",
-      icon: "",
-    },
-  ])
+  const [bookmarks, setBookmarks] = React.useState<BOOKMARK[]>([])
 
   React.useEffect(() => {
     if (inView) {
@@ -114,7 +90,7 @@ const Home: React.FC = () => {
         className="flex justify-center pt-20 text-slate-700 md:pt-40"
       >
         <div className="w-[500px]">
-          <h1 className="mb-1 text-sm text-slate-700">Bookmarks</h1>
+          <h1 className="mb-2 text-sm text-slate-700">Bookmarks</h1>
           <div className="group relative flex items-center">
             <Plus
               size={15}
@@ -131,7 +107,9 @@ const Home: React.FC = () => {
               onKeyUp={addBookmark}
             />
           </div>
-          <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
+          {bookmarks.length > 0 && (
+            <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
+          )}
           <div className="flex w-full flex-col">
             {bookmarks.map((bookmark) => (
               <AnimatePresence key={bookmark.id}>
