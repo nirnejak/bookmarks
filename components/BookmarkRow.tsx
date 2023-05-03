@@ -28,16 +28,7 @@ const BookmarkRow: React.FC<Props> = ({
       dragListener={false}
       dragControls={dragControls}
     >
-      <div className="group -mx-1 flex items-center rounded p-1">
-        <div
-          className="mr-1 cursor-grab text-slate-400"
-          style={style as any}
-          onPointerDown={(e) => {
-            dragControls.start(e)
-          }}
-        >
-          <DragVerticalFill size={15} />
-        </div>
+      <div className="group -mx-2 flex items-center rounded p-1">
         <Link
           target="_blank"
           href={bookmark.link}
@@ -45,23 +36,34 @@ const BookmarkRow: React.FC<Props> = ({
         >
           {bookmark.title}
         </Link>
-        <div className="ml-auto hidden group-hover:flex">
-          <button
-            className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
-            onClick={() => {
-              editBookmark(bookmark.id)
+        <div className="ml-auto flex items-center gap-2">
+          <div className="hidden group-hover:flex">
+            <button
+              className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
+              onClick={() => {
+                editBookmark(bookmark.id)
+              }}
+            >
+              <Pencil size={17} />
+            </button>
+            <button
+              className="rounded p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
+              onClick={() => {
+                deleteBookmark(bookmark.id)
+              }}
+            >
+              <TrashBin size={17} />
+            </button>
+          </div>
+          <div
+            className="cursor-grab text-slate-400"
+            style={style as any}
+            onPointerDown={(e) => {
+              dragControls.start(e)
             }}
           >
-            <Pencil size={17} />
-          </button>
-          <button
-            className="rounded p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
-            onClick={() => {
-              deleteBookmark(bookmark.id)
-            }}
-          >
-            <TrashBin size={17} />
-          </button>
+            <DragVerticalFill size={15} />
+          </div>
         </div>
       </div>
     </Reorder.Item>
