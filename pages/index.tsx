@@ -1,10 +1,8 @@
 import * as React from "react"
-import { useInView } from "react-intersection-observer"
 
-import { Pencil, Plus, TrashBin } from "akar-icons"
-import { motion, useAnimation, Reorder } from "framer-motion"
+import { Plus } from "akar-icons"
+import { motion, Reorder } from "framer-motion"
 import Head from "next/head"
-import Link from "next/link"
 import { v4 as uuidv4 } from "uuid"
 
 import { getUrlMetadata } from "../utils/getUrlMetadata"
@@ -18,20 +16,9 @@ export interface BOOKMARK {
 }
 
 const Home: React.FC = () => {
-  const controls = useAnimation()
-  const [ref, inView] = useInView()
-
   const [url, setUrl] = React.useState("")
 
   const [bookmarks, setBookmarks] = React.useState<BOOKMARK[]>([])
-
-  React.useEffect(() => {
-    if (inView) {
-      controls.start("visible").catch((err) => {
-        console.log(err)
-      })
-    }
-  }, [controls, inView])
 
   const addBookmark = (e: React.KeyboardEvent): void => {
     if (url.length === 0) return
@@ -69,11 +56,6 @@ const Home: React.FC = () => {
       })
   }
 
-  const variants = {
-    visible: { opacity: 1, translateY: 0 },
-    hidden: { opacity: 0, translateY: 10 },
-  }
-
   return (
     <div>
       <Head>
@@ -82,15 +64,13 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <motion.main
-        ref={ref}
-        initial="hidden"
-        animate={controls}
-        variants={variants}
-        transition={{ delay: 0, duration: 0.15, type: "spring" }}
-        className="flex justify-center pt-20 text-slate-700 md:pt-40"
-      >
-        <div className="w-[500px]">
+      <main className="flex justify-center pt-20 text-slate-700 md:pt-40">
+        <motion.div
+          initial={{ opacity: 0, translateY: 20 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ duration: 0.15, type: "spring" }}
+          className="w-[500px]"
+        >
           <h1 className="mb-2 text-sm text-slate-700">Bookmarks</h1>
           <div className="group relative flex items-center">
             <Plus
@@ -123,8 +103,8 @@ const Home: React.FC = () => {
               ))}
             </Reorder.Group>
           </div>
-        </div>
-      </motion.main>
+        </motion.div>
+      </main>
     </div>
   )
 }

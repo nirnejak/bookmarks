@@ -20,7 +20,6 @@
     "next": "^13.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intersection-observer": "^9.4.3",
     "sharp": "^0.32.1",
     "url-metadata": "^3.0.1",
     "use-sound": "^4.0.1",
