@@ -6,11 +6,15 @@ const handler = async (
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void> => {
-  const { rows } = await sql`SELECT * from bookmarks`
+  if (request.method === "GET") {
+    const { rows } = await sql`SELECT * from bookmarks`
 
-  response.send({
-    result: rows,
-  })
+    response.json({
+      result: rows,
+    })
+  } else {
+    response.send(405)
+  }
 }
 
 export default handler
