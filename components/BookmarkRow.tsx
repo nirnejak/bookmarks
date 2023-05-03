@@ -20,6 +20,8 @@ const BookmarkRow: React.FC<Props> = ({
   const y = useMotionValue(0)
   const dragControls = useDragControls()
 
+  const style = { y }
+
   return (
     <Reorder.Item
       value={bookmark}
@@ -29,8 +31,7 @@ const BookmarkRow: React.FC<Props> = ({
       <div className="group -mx-1 flex items-center rounded p-1">
         <div
           className="mr-1 cursor-grab text-slate-400"
-          style={{ y }}
-          dragListener={false}
+          style={style as any}
           onPointerDown={(e) => {
             dragControls.start(e)
           }}
