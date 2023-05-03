@@ -92,6 +92,7 @@ const Home: React.FC = () => {
                     icon: "",
                   }
                   setBookmarks([newBookmark, ...bookmarks])
+                  setUrl("")
                 }
               }}
             />
