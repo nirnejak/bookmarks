@@ -117,6 +117,7 @@ const Home: React.FC = () => {
             {bookmarks.map((bookmark, index) => (
               <div key={index}>
                 <Link
+                  target="_blank"
                   href={bookmark.link}
                   className="-mx-2 my-0 block rounded p-2 text-sm hover:bg-slate-200"
                 >
