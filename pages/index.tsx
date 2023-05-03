@@ -2,14 +2,15 @@ import * as React from "react"
 import { useInView } from "react-intersection-observer"
 
 import { Pencil, Plus, TrashBin } from "akar-icons"
-import { motion, useAnimation, AnimatePresence, Reorder } from "framer-motion"
+import { motion, useAnimation, Reorder } from "framer-motion"
 import Head from "next/head"
 import Link from "next/link"
 import { v4 as uuidv4 } from "uuid"
 
 import { getUrlMetadata } from "../utils/getUrlMetadata"
+import BookmarkRow from "components/BookmarkRow"
 
-interface BOOKMARK {
+export interface BOOKMARK {
   id: number
   title: string
   link: string
@@ -113,35 +114,12 @@ const Home: React.FC = () => {
           <div className="flex w-full flex-col">
             <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>
               {bookmarks.map((bookmark) => (
-                <Reorder.Item key={bookmark.id} value={bookmark}>
-                  <div className="group -mx-2 flex cursor-move items-center rounded p-1 hover:bg-slate-100">
-                    <Link
-                      target="_blank"
-                      href={bookmark.link}
-                      className="my-0 p-1 text-sm text-slate-700 hover:text-slate-900"
-                    >
-                      {bookmark.title}
-                    </Link>
-                    <div className="ml-auto hidden group-hover:flex">
-                      <button
-                        className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
-                        onClick={() => {
-                          editBookmark(bookmark.id)
-                        }}
-                      >
-                        <Pencil size={17} />
-                      </button>
-                      <button
-                        className="rounded p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
-                        onClick={() => {
-                          deleteBookmark(bookmark.id)
-                        }}
-                      >
-                        <TrashBin size={17} />
-                      </button>
-                    </div>
-                  </div>
-                </Reorder.Item>
+                <BookmarkRow
+                  key={bookmark.id}
+                  bookmark={bookmark}
+                  editBookmark={editBookmark}
+                  deleteBookmark={deleteBookmark}
+                />
               ))}
             </Reorder.Group>
           </div>
