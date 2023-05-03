@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useInView } from "react-intersection-observer"
 
-import { Pencil, Plus, TrashBin, TrashCan } from "akar-icons"
+import { Pencil, Plus, TrashBin } from "akar-icons"
 import { motion, useAnimation } from "framer-motion"
 import Head from "next/head"
 import Link from "next/link"
@@ -142,7 +142,7 @@ const Home: React.FC = () => {
                 >
                   {bookmark.title}
                 </Link>
-                <div className="ml-auto hidden gap-1.5 group-hover:flex">
+                <div className="ml-auto hidden gap-2 group-hover:flex">
                   <button
                     className="text-slate-400 hover:text-slate-600"
                     onClick={() => {
