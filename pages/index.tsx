@@ -69,12 +69,14 @@ const Home: React.FC = () => {
     }
   }
 
-  const editBookmark = (id: string): void => {
+  const editBookmark = (id: number): void => {
     // TODO: Edit boomark
   }
 
-  const deleteBookmark = (id: string): void => {
-    // TODO: Delete boomark
+  const deleteBookmark = (id: number): void => {
+    setBookmarks((bookmarks) =>
+      bookmarks.filter((bookmark) => bookmark.id !== id)
+    )
   }
 
   const fillMetadata = (id, url): void => {
