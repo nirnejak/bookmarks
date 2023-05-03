@@ -6,6 +6,8 @@ import { motion, useAnimation } from "framer-motion"
 import Head from "next/head"
 import Link from "next/link"
 
+import { getUrlMetadata } from "../utils/getUrlMetadata"
+
 const Home: React.FC = () => {
   const controls = useAnimation()
   const [ref, inView] = useInView()
@@ -48,6 +50,29 @@ const Home: React.FC = () => {
     }
   }, [controls, inView])
 
+  const addBookmark = (e: React.KeyboardEvent): void => {
+    if (e.key === "Enter") {
+      const newBookmark = {
+        title: url,
+        link: url,
+        icon: "",
+      }
+      setBookmarks([newBookmark, ...bookmarks])
+      fillMetadata(0, url)
+      setUrl("")
+    }
+  }
+
+  const fillMetadata = (id, url): void => {
+    getUrlMetadata(url, "jeetnirnejak@gmail.com")
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   const variants = {
     visible: { opacity: 1, translateY: 0 },
     hidden: { opacity: 0, translateY: 10 },
@@ -84,32 +109,21 @@ const Home: React.FC = () => {
               onChange={(e) => {
                 setUrl(e.target.value)
               }}
-              onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  const newBookmark = {
-                    title: url,
-                    link: url,
-                    icon: "",
-                  }
-                  setBookmarks([newBookmark, ...bookmarks])
-                  setUrl("")
-                }
-              }}
+              onKeyUp={addBookmark}
             />
           </div>
           <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
-          <div className="-mx-2 flex w-full flex-col gap-1">
+          <div className="flex w-full flex-col">
             {bookmarks.map((bookmark, index) => (
-              <>
+              <div key={index}>
                 <Link
                   href={bookmark.link}
-                  key={index}
-                  className="flex rounded p-2 text-sm hover:bg-slate-200"
+                  className="-mx-2 my-0 block rounded p-2 text-sm hover:bg-slate-200"
                 >
                   {bookmark.title}
                 </Link>
-                {index !== bookmarks.length - 1 && <hr />}
-              </>
+                {index !== bookmarks.length - 1 && <hr className="my-0.5" />}
+              </div>
             ))}
           </div>
         </div>
