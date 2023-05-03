@@ -80,7 +80,7 @@ const Home: React.FC = () => {
             <input
               type="text"
               value={url}
-              className="relative w-full rounded bg-slate-200 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
+              className="relative w-full rounded bg-slate-200/80 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
               placeholder="Inset link, image, or just plain text..."
               onChange={(e) => {
                 setUrl(e.target.value)
