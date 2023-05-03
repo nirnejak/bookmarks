@@ -23,7 +23,7 @@ const BookmarkRow: React.FC<Props> = ({
         <Link
           target="_blank"
           href={bookmark.link}
-          className="my-0 p-1 text-sm text-slate-700 hover:text-slate-900"
+          className="my-0 truncate p-1 text-sm text-slate-700 hover:text-slate-900"
         >
           {bookmark.title}
         </Link>
