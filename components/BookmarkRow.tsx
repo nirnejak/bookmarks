@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import { Pencil, TrashBin } from "akar-icons"
-import { Reorder } from "framer-motion"
+import { Pencil, TrashBin, DragVerticalFill } from "akar-icons"
+import { Reorder, useDragControls, useMotionValue } from "framer-motion"
 import Link from "next/link"
 
 import { type BOOKMARK } from "pages"
@@ -17,9 +17,26 @@ const BookmarkRow: React.FC<Props> = ({
   editBookmark,
   deleteBookmark,
 }) => {
+  const y = useMotionValue(0)
+  const dragControls = useDragControls()
+
   return (
-    <Reorder.Item value={bookmark}>
-      <div className="group -mx-2 flex cursor-move items-center rounded p-1 hover:bg-slate-100">
+    <Reorder.Item
+      value={bookmark}
+      dragListener={false}
+      dragControls={dragControls}
+    >
+      <div className="group -mx-1 flex items-center rounded p-1">
+        <div
+          className="mr-1 cursor-grab text-slate-400"
+          style={{ y }}
+          dragListener={false}
+          onPointerDown={(e) => {
+            dragControls.start(e)
+          }}
+        >
+          <DragVerticalFill size={15} />
+        </div>
         <Link
           target="_blank"
           href={bookmark.link}

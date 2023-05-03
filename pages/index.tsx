@@ -111,7 +111,7 @@ const Home: React.FC = () => {
           {bookmarks.length > 0 && (
             <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
           )}
-          <div className="flex w-full flex-col">
+          <div className="flex w-full select-none flex-col">
             <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>
               {bookmarks.map((bookmark) => (
                 <BookmarkRow
