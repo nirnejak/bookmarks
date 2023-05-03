@@ -71,7 +71,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["var(--inter-font)"],
+      sans: ["var(--font-general-sans)"],
     },
   },
   variants: {

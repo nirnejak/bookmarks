@@ -1,22 +1,31 @@
 import * as React from "react"
 
 import type { AppProps } from "next/app"
-import { Inter } from "next/font/google"
+import localFont from "next/font/local"
 
 import classNames from "utils/classNames"
 
 import "../styles/main.css"
 
-const inter = Inter({
-  variable: "--inter-font",
-  subsets: ["latin"],
+const generalSans = localFont({
+  variable: "--font-general-sans",
+  src: [
+    {
+      path: "../fonts/GeneralSans-Variable.ttf",
+      style: "normal",
+    },
+    {
+      path: "../fonts/GeneralSans-VariableItalic.ttf",
+      style: "italic",
+    },
+  ],
 })
 
 const MyApp: React.FC<AppProps> = (props) => {
   const { Component, pageProps } = props
 
   return (
-    <main className={classNames(inter.variable, "font-sans")}>
+    <main className={classNames(generalSans.variable, "font-sans")}>
       <Component {...pageProps} />
     </main>
   )
