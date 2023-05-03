@@ -23,7 +23,8 @@
     "react-intersection-observer": "^9.4.3",
     "sharp": "^0.32.1",
     "url-metadata": "^3.0.1",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.16.3",

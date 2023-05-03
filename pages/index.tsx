@@ -2,9 +2,10 @@ import * as React from "react"
 import { useInView } from "react-intersection-observer"
 
 import { Pencil, Plus, TrashBin } from "akar-icons"
-import { motion, useAnimation } from "framer-motion"
+import { motion, useAnimation, AnimatePresence } from "framer-motion"
 import Head from "next/head"
 import Link from "next/link"
+import { v4 as uuidv4 } from "uuid"
 
 import { getUrlMetadata } from "../utils/getUrlMetadata"
 
@@ -56,14 +57,16 @@ const Home: React.FC = () => {
   }, [controls, inView])
 
   const addBookmark = (e: React.KeyboardEvent): void => {
+    if (url.length === 0) return
+
     if (e.key === "Enter") {
       const newBookmark = {
-        id: bookmarks.length,
+        id: uuidv4(),
         title: url,
         link: url,
         icon: "",
       }
-      setBookmarks([newBookmark, ...bookmarks])
+      setBookmarks((currentBookmarks) => [newBookmark, ...currentBookmarks])
       fillMetadata(0, url)
       setUrl("")
     }
@@ -130,37 +133,41 @@ const Home: React.FC = () => {
           </div>
           <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
           <div className="flex w-full flex-col">
-            {bookmarks.map((bookmark, index) => (
-              <div
-                className="group -mx-2 flex items-center rounded p-2"
-                key={index}
-              >
-                <Link
-                  target="_blank"
-                  href={bookmark.link}
-                  className="my-0 text-sm text-slate-700 hover:text-slate-900"
+            {bookmarks.map((bookmark) => (
+              <AnimatePresence key={bookmark.id}>
+                <motion.div
+                  initial={{ opacity: 0, translateY: -10 }}
+                  animate={{ opacity: 1, translateY: 0 }}
+                  exit={{ opacity: 0, translateY: 0 }}
+                  className="group -mx-2 flex items-center rounded p-2"
                 >
-                  {bookmark.title}
-                </Link>
-                <div className="ml-auto hidden gap-2 group-hover:flex">
-                  <button
-                    className="text-slate-400 hover:text-slate-600"
-                    onClick={() => {
-                      editBookmark(bookmark.id)
-                    }}
+                  <Link
+                    target="_blank"
+                    href={bookmark.link}
+                    className="my-0 text-sm text-slate-700 hover:text-slate-900"
                   >
-                    <Pencil size={17} />
-                  </button>
-                  <button
-                    className="text-red-400 hover:text-red-600"
-                    onClick={() => {
-                      deleteBookmark(bookmark.id)
-                    }}
-                  >
-                    <TrashBin size={17} />
-                  </button>
-                </div>
-              </div>
+                    {bookmark.title}
+                  </Link>
+                  <div className="ml-auto hidden gap-2 group-hover:flex">
+                    <button
+                      className="text-slate-400 hover:text-slate-600"
+                      onClick={() => {
+                        editBookmark(bookmark.id)
+                      }}
+                    >
+                      <Pencil size={17} />
+                    </button>
+                    <button
+                      className="text-red-400 hover:text-red-600"
+                      onClick={() => {
+                        deleteBookmark(bookmark.id)
+                      }}
+                    >
+                      <TrashBin size={17} />
+                    </button>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             ))}
           </div>
         </div>
