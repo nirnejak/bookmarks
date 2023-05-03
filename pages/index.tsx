@@ -10,6 +10,8 @@ const Home: React.FC = () => {
   const controls = useAnimation()
   const [ref, inView] = useInView()
 
+  const [url, setUrl] = React.useState("")
+
   const [bookmarks, setBookmarks] = React.useState([
     {
       title: "Portfolio website",
@@ -76,8 +78,22 @@ const Home: React.FC = () => {
             />
             <input
               type="text"
+              value={url}
               className="relative w-full rounded bg-slate-200 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
               placeholder="Inset link, image, or just plain text..."
+              onChange={(e) => {
+                setUrl(e.target.value)
+              }}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  const newBookmark = {
+                    title: url,
+                    link: url,
+                    icon: "",
+                  }
+                  setBookmarks([newBookmark, ...bookmarks])
+                }
+              }}
             />
           </div>
           <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
