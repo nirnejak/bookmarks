@@ -132,19 +132,19 @@ const Home: React.FC = () => {
           <div className="flex w-full flex-col">
             {bookmarks.map((bookmark, index) => (
               <div
-                className="group -mx-2 flex items-center rounded p-2 hover:bg-slate-200"
+                className="group -mx-2 flex items-center rounded p-2"
                 key={index}
               >
                 <Link
                   target="_blank"
                   href={bookmark.link}
-                  className="my-0 text-sm"
+                  className="my-0 text-sm text-slate-700 hover:text-slate-900"
                 >
                   {bookmark.title}
                 </Link>
                 <div className="ml-auto hidden gap-1.5 group-hover:flex">
                   <button
-                    className="text-slate-500 hover:text-slate-700"
+                    className="text-slate-400 hover:text-slate-600"
                     onClick={() => {
                       editBookmark(bookmark.id)
                     }}
@@ -152,7 +152,7 @@ const Home: React.FC = () => {
                     <Pencil size={17} />
                   </button>
                   <button
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-400 hover:text-red-600"
                     onClick={() => {
                       deleteBookmark(bookmark.id)
                     }}
