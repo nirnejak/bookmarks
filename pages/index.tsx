@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useInView } from "react-intersection-observer"
 
-import { Plus } from "akar-icons"
+import { Pencil, Plus, TrashBin, TrashCan } from "akar-icons"
 import { motion, useAnimation } from "framer-motion"
 import Head from "next/head"
 import Link from "next/link"
@@ -16,26 +16,31 @@ const Home: React.FC = () => {
 
   const [bookmarks, setBookmarks] = React.useState([
     {
+      id: 1,
       title: "Portfolio website",
       link: "https://svg-animations-gallery.vercel.app/",
       icon: "",
     },
     {
+      id: 2,
       title: "SVG Animations",
       link: "https://svg-animations-gallery.vercel.app/",
       icon: "",
     },
     {
+      id: 3,
       title: "Portfolio website",
       link: "https://svg-animations-gallery.vercel.app/",
       icon: "",
     },
     {
+      id: 4,
       title: "SVG Animations",
       link: "https://svg-animations-gallery.vercel.app/",
       icon: "",
     },
     {
+      id: 5,
       title: "Portfolio website",
       link: "https://svg-animations-gallery.vercel.app/",
       icon: "",
@@ -53,6 +58,7 @@ const Home: React.FC = () => {
   const addBookmark = (e: React.KeyboardEvent): void => {
     if (e.key === "Enter") {
       const newBookmark = {
+        id: bookmarks.length,
         title: url,
         link: url,
         icon: "",
@@ -61,6 +67,14 @@ const Home: React.FC = () => {
       fillMetadata(0, url)
       setUrl("")
     }
+  }
+
+  const editBookmark = (id: string): void => {
+    // TODO: Edit boomark
+  }
+
+  const deleteBookmark = (id: string): void => {
+    // TODO: Delete boomark
   }
 
   const fillMetadata = (id, url): void => {
@@ -115,15 +129,35 @@ const Home: React.FC = () => {
           <p className="mb-3 mt-10 text-xs text-slate-500">Inbox</p>
           <div className="flex w-full flex-col">
             {bookmarks.map((bookmark, index) => (
-              <div key={index}>
+              <div
+                className="group -mx-2 flex items-center rounded p-2 hover:bg-slate-200"
+                key={index}
+              >
                 <Link
                   target="_blank"
                   href={bookmark.link}
-                  className="-mx-2 my-0 block rounded p-2 text-sm hover:bg-slate-200"
+                  className="my-0 text-sm"
                 >
                   {bookmark.title}
                 </Link>
-                {index !== bookmarks.length - 1 && <hr className="my-0.5" />}
+                <div className="ml-auto hidden gap-1.5 group-hover:flex">
+                  <button
+                    className="text-slate-500 hover:text-slate-700"
+                    onClick={() => {
+                      editBookmark(bookmark.id)
+                    }}
+                  >
+                    <Pencil size={17} />
+                  </button>
+                  <button
+                    className="text-red-500 hover:text-red-700"
+                    onClick={() => {
+                      deleteBookmark(bookmark.id)
+                    }}
+                  >
+                    <TrashBin size={17} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
