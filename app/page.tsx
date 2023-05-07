@@ -12,9 +12,13 @@ export interface BOOKMARK {
   icon: string
 }
 
-const getBookmarks = async (): Promise<BOOKMARK[]> => {
-  const { rows } = await sql`SELECT * from bookmarks`
-  return rows as BOOKMARK[]
+const getBookmarks = async (): Promise<BOOKMARK[] | undefined> => {
+  try {
+    const { rows } = await sql`SELECT * from bookmarks`
+    return rows as BOOKMARK[]
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 const Home = async (): Promise<React.JSX.Element> => {
