@@ -24,8 +24,7 @@ const generalSans = localFont({
 
 const baseUrl = "https://nirnejak.com"
 const metaTitle = "Bookmarks"
-const metaDescription =
-  "Jitendra Nirnejak is a developer and designer based out of Bangalore, India. He has expertise in React, TypeScript, Node.js, UI Design and Prototyping."
+const metaDescription = "An elegant bookmarking tool."
 const metaImage = `${baseUrl}/cover.png`
 
 const path = "/"
@@ -70,7 +69,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
           content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
         <meta itemProp="description" content={metaDescription} />
-        <meta itemProp="name" content="Bookmarks" />
+        <meta itemProp="name" content={metaTitle} />
         <meta property="fb:admins" content="<fb-admin-id>" />
         <meta property="fb:app_id" content="<fb-app-id>" />
         <link rel="canonical" href={`${baseUrl}/`} />
@@ -94,7 +93,6 @@ const RootLayout: React.FC<Props> = ({ children }) => {
       <body
         className={classNames(
           generalSans.variable,
-          "font-sans",
           "overflow-x-hidden bg-slate-50"
         )}
       >
