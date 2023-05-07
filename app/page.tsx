@@ -12,7 +12,7 @@ export interface BOOKMARK {
   icon: string
 }
 
-const getBookmarks = async (): Promise<BOOKMARK[] | undefined> => {
+const getBookmarks = async (): Promise<BOOKMARK[]> => {
   try {
     const { rows } = await sql`SELECT * from bookmarks`
     return rows as BOOKMARK[]
