@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { sql } from "@vercel/postgres"
 import { GithubFill } from "akar-icons"
 
 import Bookmarks from "components/Bookmarks"
@@ -11,7 +12,14 @@ export interface BOOKMARK {
   icon: string
 }
 
+const getBookmarks = async (): Promise<BOOKMARK[]> => {
+  const { rows } = await sql`SELECT * from bookmarks`
+  return rows as BOOKMARK[]
+}
+
 const Home = async (): Promise<React.JSX.Element> => {
+  await getBookmarks()
+
   return (
     <main>
       <section className="flex justify-center pt-20 text-slate-700 md:pt-40">
