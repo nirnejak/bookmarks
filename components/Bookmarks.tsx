@@ -13,6 +13,20 @@ interface Props {
   defaultBookmarks: BOOKMARK[]
 }
 
+const addBookmarkAPI = (newBookmark): void => {
+  fetch("/api/bookmarks", {
+    method: "POST",
+    body: JSON.stringify(newBookmark),
+  })
+    .then(async (res) => await res.json())
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   const [url, setUrl] = React.useState("")
 
@@ -32,17 +46,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
       fillMetadata(0, url)
       setUrl("")
 
-      fetch("/api/bookmarks", {
-        method: "POST",
-        body: JSON.stringify(newBookmark),
-      })
-        .then(async (res) => await res.json())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      addBookmarkAPI(newBookmark)
     }
   }
 
