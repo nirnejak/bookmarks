@@ -31,6 +31,18 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
       setBookmarks((currentBookmarks) => [newBookmark, ...currentBookmarks])
       fillMetadata(0, url)
       setUrl("")
+
+      fetch("/api/bookmarks", {
+        method: "POST",
+        body: JSON.stringify(newBookmark),
+      })
+        .then(async (res) => await res.json())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 
