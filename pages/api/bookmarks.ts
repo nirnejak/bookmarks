@@ -15,21 +15,23 @@ const handler = async (
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void> => {
-  if (request.method === "POST") {
-    try {
-      await addBookmark(
-        request.body.id,
-        request.body.title,
-        request.body.link,
-        request.body.icon
-      )
-      response.send(201)
-    } catch (err) {
-      console.log(err)
-      response.send(500)
-    }
-  } else {
-    response.send(405)
+  switch (request.method) {
+    case "POST":
+      try {
+        await addBookmark(
+          request.body.id,
+          request.body.title,
+          request.body.link,
+          request.body.icon
+        )
+        response.send(201)
+      } catch (err) {
+        console.log(err)
+        response.send(500)
+      }
+      break
+    default:
+      response.send(405)
   }
 }
 
