@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react"
 
 import { Pencil, TrashBin, DragVerticalFill } from "akar-icons"
