@@ -33,9 +33,12 @@ const BookmarkRow: React.FC<Props> = ({
         <Link
           target="_blank"
           href={bookmark.link}
-          className="my-0 truncate p-1 text-sm text-slate-700 hover:text-slate-900"
+          className="my-0 flex items-center gap-1 truncate p-1 text-sm text-slate-700 hover:text-slate-900"
         >
-          {bookmark.title}
+          {bookmark.icon !== "" && (
+            <img src={bookmark.icon} alt={bookmark.title} className="w-4" />
+          )}
+          <span>{bookmark.title}</span>
         </Link>
         <div className="ml-auto flex items-center gap-2">
           <div className="hidden group-hover:flex">
