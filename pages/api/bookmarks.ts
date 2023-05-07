@@ -1,18 +1,14 @@
 import { type NextApiRequest, type NextApiResponse } from "next"
 
-import { sql } from "@vercel/postgres"
+import { sql, type QueryResult, type QueryResultRow } from "@vercel/postgres"
 
 const addBookmark = async (
-  id: number,
+  id: string,
   title: string,
   link: string,
   icon: string
-): Promise<void> => {
-  try {
-    await sql`INSERT INTO bookmarks VALUES("${id}", "${title}", "${link}", "${icon}")`
-  } catch (err) {
-    return err
-  }
+): Promise<QueryResult<QueryResultRow>> => {
+  return await sql`INSERT INTO bookmarks(id, title, link, icon) VALUES ('${id}', '${title}', '${link}', '${icon}')`
 }
 
 const handler = async (
@@ -29,6 +25,7 @@ const handler = async (
       )
       response.send(201)
     } catch (err) {
+      console.log(err)
       response.send(500)
     }
   } else {
