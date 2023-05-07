@@ -24,14 +24,14 @@ const handler = async (
           request.body.link,
           request.body.icon
         )
-        response.send(201)
+        response.status(201).json({ message: "Bookmark Added" })
       } catch (err) {
         console.log(err)
-        response.send(500)
+        response.status(500).json({ message: "Unable to add Bookmark" })
       }
       break
     default:
-      response.send(405)
+      response.status(405)
   }
 }
 
