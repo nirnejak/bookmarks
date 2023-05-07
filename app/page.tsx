@@ -1,11 +1,12 @@
+"use client"
 import * as React from "react"
 
-import { GithubFill, Plus } from "akar-icons"
+import { GithubFill, Plus, Sort } from "akar-icons"
 import { motion, Reorder } from "framer-motion"
 import Head from "next/head"
 import { v4 as uuidv4 } from "uuid"
 
-import { getUrlMetadata } from "../utils/getUrlMetadata"
+// import { getUrlMetadata } from "../utils/getUrlMetadata"
 import BookmarkRow from "components/BookmarkRow"
 
 export interface BOOKMARK {
@@ -36,6 +37,21 @@ const Home: React.FC = () => {
     }
   }
 
+  const sortBookmarks = (): void => {
+    setBookmarks((bookmarks) => {
+      const updatedBookmarks = bookmarks
+      updatedBookmarks.sort((bk1, bk2) => {
+        if (bk1.title > bk2.title) {
+          return 1
+        } else if (bk1.title < bk2.title) {
+          return -1
+        }
+        return 0
+      })
+      return updatedBookmarks
+    })
+  }
+
   const editBookmark = (id: number): void => {
     // TODO: Edit boomark
   }
@@ -47,13 +63,13 @@ const Home: React.FC = () => {
   }
 
   const fillMetadata = (id, url): void => {
-    getUrlMetadata(url, "jeetnirnejak@gmail.com")
-      .then((data) => {
-        console.log(data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // getUrlMetadata(url, "jeetnirnejak@gmail.com")
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   }
 
   return (
@@ -89,9 +105,17 @@ const Home: React.FC = () => {
             />
           </div>
           {bookmarks.length > 0 && (
-            <p className="mb-3 mt-10 text-xs font-medium text-slate-500">
-              Inbox
-            </p>
+            <div className="mb-3 mt-10 flex items-center text-slate-500">
+              <p className="text-xs font-medium">Inbox</p>
+              <button
+                className="-mr-1 ml-auto rounded p-1 hover:bg-slate-100"
+                onClick={() => {
+                  sortBookmarks()
+                }}
+              >
+                <Sort size={15} />
+              </button>
+            </div>
           )}
           <div className="flex w-full select-none flex-col font-[450]">
             <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>

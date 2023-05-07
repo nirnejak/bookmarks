@@ -4,7 +4,7 @@ import { Pencil, TrashBin, DragVerticalFill } from "akar-icons"
 import { Reorder, useDragControls, useMotionValue } from "framer-motion"
 import Link from "next/link"
 
-import { type BOOKMARK } from "pages"
+import { type BOOKMARK } from "app/page"
 
 interface Props {
   bookmark: BOOKMARK
