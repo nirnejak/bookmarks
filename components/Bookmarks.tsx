@@ -50,7 +50,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   }
 
   const editBookmark = (id: number): void => {
-    // TODO: Edit boomark
+    // TODO: Edit bookmark
   }
 
   const deleteBookmark = (id: number): void => {
