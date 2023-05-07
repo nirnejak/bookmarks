@@ -18,15 +18,16 @@ const getBookmarks = async (): Promise<BOOKMARK[] | undefined> => {
     return rows as BOOKMARK[]
   } catch (err) {
     console.log(err)
+    return []
   }
 }
 
 const Home = async (): Promise<React.JSX.Element> => {
-  await getBookmarks()
+  const bookmarks = await getBookmarks()
 
   return (
     <main>
-      <Bookmarks />
+      <Bookmarks defaultBookmarks={bookmarks} />
       <Footer />
     </main>
   )

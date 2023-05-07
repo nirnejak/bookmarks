@@ -9,10 +9,14 @@ import { v4 as uuidv4 } from "uuid"
 import { type BOOKMARK } from "app/page"
 import BookmarkRow from "components/BookmarkRow"
 
-const Bookmarks: React.FC = () => {
+interface Props {
+  defaultBookmarks: BOOKMARK[]
+}
+
+const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   const [url, setUrl] = React.useState("")
 
-  const [bookmarks, setBookmarks] = React.useState<BOOKMARK[]>([])
+  const [bookmarks, setBookmarks] = React.useState<BOOKMARK[]>(defaultBookmarks)
 
   const addBookmark = (e: React.KeyboardEvent): void => {
     if (url.length === 0) return
