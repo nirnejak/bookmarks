@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
-    "@vercel/postgres": "^0.2.0",
+    "@vercel/postgres": "^0.2.1",
     "akar-icons": "^1.9.27",
     "dotenv": "^16.0.3",
     "framer-motion": "^10.12.8",
