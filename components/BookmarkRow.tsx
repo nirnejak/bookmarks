@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 
-import { Pencil, TrashBin, DragVerticalFill } from "akar-icons"
+import { Pencil, TrashBin, DragVerticalFill, Copy } from "akar-icons"
 import { Reorder, useDragControls, useMotionValue } from "framer-motion"
 import Link from "next/link"
 
@@ -9,12 +9,14 @@ import { type BOOKMARK } from "app/page"
 
 interface Props {
   bookmark: BOOKMARK
+  copyLink: (link: string) => void
   editBookmark: (id: number) => void
   deleteBookmark: (id: number) => void
 }
 
 const BookmarkRow: React.FC<Props> = ({
   bookmark,
+  copyLink,
   editBookmark,
   deleteBookmark,
 }) => {
@@ -42,6 +44,14 @@ const BookmarkRow: React.FC<Props> = ({
         </Link>
         <div className="ml-auto flex items-center gap-2">
           <div className="hidden group-hover:flex">
+            <button
+              className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
+              onClick={() => {
+                copyLink(bookmark.link)
+              }}
+            >
+              <Copy size={17} />
+            </button>
             <button
               className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
               onClick={() => {
