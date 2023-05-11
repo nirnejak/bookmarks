@@ -8,7 +8,7 @@ const addBookmark = async (
   link: string,
   icon: string
 ): Promise<QueryResult<QueryResultRow>> => {
-  return await sql`INSERT INTO bookmarks(id, title, link, icon) VALUES ('${id}', '${title}', '${link}', '${icon}')`
+  return await sql`INSERT INTO bookmarks(id, title, link, icon) VALUES (${id}, ${title}, ${link}, ${icon})`
 }
 
 const handler = async (
