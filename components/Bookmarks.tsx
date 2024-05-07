@@ -16,6 +16,9 @@ interface Props {
 }
 
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
+  console.log(typeof defaultBookmarks)
+  console.log(defaultBookmarks.length)
+
   const [url, setUrl] = React.useState("")
 
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
@@ -118,7 +121,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
           </div>
         </motion.div>
       </section>
-      <Toaster position="bottom-right" />
+      <Toaster position="bottom-right" closeButton />
     </>
   )
 }
