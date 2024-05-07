@@ -3,48 +3,22 @@ import * as React from "react"
 
 import { Plus, Sort } from "akar-icons"
 import { motion, Reorder } from "framer-motion"
-import { Toaster, toast } from "sonner"
+import { Toaster } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
-// import { getUrlMetadata } from "../utils/getUrlMetadata"
-import { type BOOKMARK } from "app/page"
+import copyToClipboard from "utils/copyToClipboard"
+import getUrlFavicon from "utils/getUrlFavicon"
+
 import BookmarkRow from "components/BookmarkRow"
 
 interface Props {
-  defaultBookmarks: BOOKMARK[]
-}
-
-const addBookmarkAPI = (newBookmark): void => {
-  fetch("/api/bookmarks/", {
-    method: "POST",
-    body: JSON.stringify(newBookmark),
-  })
-    .then(async (res) => await res.json())
-    .then((data) => {
-      console.log(data)
-    })
-    .catch((error) => {
-      toast.error("Unable to add Bookmark")
-      console.error(error)
-    })
-}
-
-const copyLink = (link): void => {
-  navigator.clipboard
-    .writeText(link)
-    .then(() => {
-      toast("Copied to clipboard")
-    })
-    .catch((error) => {
-      toast.error("Unable to copy")
-      console.log(error)
-    })
+  defaultBookmarks: any[]
 }
 
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   const [url, setUrl] = React.useState("")
 
-  const [bookmarks, setBookmarks] = React.useState<BOOKMARK[]>(defaultBookmarks)
+  const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
 
   const addBookmark = (e: React.KeyboardEvent): void => {
     if (url.length === 0) return
@@ -54,20 +28,19 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         id: uuidv4(),
         title: url,
         link: url,
-        icon: "",
+        icon: getUrlFavicon(url),
       }
       setBookmarks((currentBookmarks) => [newBookmark, ...currentBookmarks])
-      fillMetadata(0, url)
       setUrl("")
 
-      addBookmarkAPI(newBookmark)
+      // TODO: add bookmark to supabase
     }
   }
 
   const sortBookmarks = (): void => {
     setBookmarks((bookmarks) => {
-      const updatedBookmarks = bookmarks
-      updatedBookmarks.sort((bk1, bk2) => {
+      const sortedBookmarks = bookmarks
+      sortedBookmarks.sort((bk1, bk2) => {
         if (bk1.title > bk2.title) {
           return 1
         } else if (bk1.title < bk2.title) {
@@ -75,28 +48,20 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         }
         return 0
       })
-      return updatedBookmarks
+      return sortedBookmarks
     })
   }
 
   const editBookmark = (id: number): void => {
-    // TODO: Edit bookmark
+    // TODO: Update bookmark in local
+    // TODO: Update bookmark item in supabase
   }
 
   const deleteBookmark = (id: number): void => {
     setBookmarks((bookmarks) =>
       bookmarks.filter((bookmark) => bookmark.id !== id)
     )
-  }
-
-  const fillMetadata = (id, url): void => {
-    // getUrlMetadata(url, "jeetnirnejak@gmail.com")
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
+    // TODO: Remove bookmark item from supabase
   }
 
   return (
@@ -144,7 +109,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
                 <BookmarkRow
                   key={bookmark.id}
                   bookmark={bookmark}
-                  copyLink={copyLink}
+                  copyLink={copyToClipboard}
                   editBookmark={editBookmark}
                   deleteBookmark={deleteBookmark}
                 />
