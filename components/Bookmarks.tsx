@@ -8,6 +8,7 @@ import { toast } from "sonner"
 
 import copyToClipboard from "utils/copyToClipboard"
 import getUrlFavicon from "utils/getUrlFavicon"
+import isValidURL from "utils/isValidURL"
 
 import BookmarkRow from "components/BookmarkRow"
 
@@ -21,9 +22,14 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
 
   const addBookmark = (e: React.KeyboardEvent): void => {
-    if (url.length === 0) return
-
     if (e.key === "Enter") {
+      if (url.length === 0) return
+
+      if (!isValidURL(url)) {
+        toast.error("Please enter a valid URL")
+        return
+      }
+
       const newBookmark = {
         id: uuidv4(),
         title: url,
@@ -85,7 +91,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
               type="text"
               value={url}
               className="relative w-full rounded bg-slate-200/80 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
-              placeholder="Inset link, image, or just plain text..."
+              placeholder="Inset link..."
               onChange={(e) => {
                 setUrl(e.target.value)
               }}
