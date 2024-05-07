@@ -34,14 +34,22 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
       const supabase = createClient()
       const { data: newBookmark, error } = await supabase
         .from("bookmarks")
-        .insert({ id: 5, title: url, url: url, image_url: getUrlFavicon(url) })
+        .insert({
+          id: uuidv4(),
+          title: url,
+          url: url,
+          image_url: getUrlFavicon(url),
+        })
         .select()
 
       if (error) {
         console.log(error)
         toast.error(error.message)
       } else {
-        setBookmarks((currentBookmarks) => [newBookmark, ...currentBookmarks])
+        setBookmarks((currentBookmarks) => [
+          ...newBookmark,
+          ...currentBookmarks,
+        ])
         setUrl("")
       }
     }
