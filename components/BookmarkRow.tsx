@@ -5,10 +5,8 @@ import { Pencil, TrashBin, DragVerticalFill, Copy } from "akar-icons"
 import { Reorder, useDragControls, useMotionValue } from "framer-motion"
 import Link from "next/link"
 
-import { type BOOKMARK } from "app/page"
-
 interface Props {
-  bookmark: BOOKMARK
+  bookmark: any[]
   copyLink: (link: string) => void
   editBookmark: (id: number) => void
   deleteBookmark: (id: number) => void
