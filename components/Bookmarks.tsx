@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import copyToClipboard from "utils/copyToClipboard"
 import getUrlFavicon from "utils/getUrlFavicon"
 import isValidURL from "utils/isValidURL"
+import { createClient } from "utils/supabase/client"
 
 import BookmarkRow from "components/BookmarkRow"
 
@@ -21,7 +22,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
 
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
 
-  const addBookmark = (e: React.KeyboardEvent): void => {
+  const addBookmark = async (e: React.KeyboardEvent): Promise<void> => {
     if (e.key === "Enter") {
       if (url.length === 0) return
 
@@ -30,16 +31,19 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         return
       }
 
-      const newBookmark = {
-        id: uuidv4(),
-        title: url,
-        link: url,
-        icon: getUrlFavicon(url),
-      }
-      setBookmarks((currentBookmarks) => [newBookmark, ...currentBookmarks])
-      setUrl("")
+      const supabase = createClient()
+      const { data: newBookmark, error } = await supabase
+        .from("bookmarks")
+        .insert({ id: 5, title: url, url: url, image_url: getUrlFavicon(url) })
+        .select()
 
-      // TODO: add bookmark to supabase
+      if (error) {
+        console.log(error)
+        toast.error(error.message)
+      } else {
+        setBookmarks((currentBookmarks) => [newBookmark, ...currentBookmarks])
+        setUrl("")
+      }
     }
   }
 
