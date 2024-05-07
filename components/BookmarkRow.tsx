@@ -32,11 +32,15 @@ const BookmarkRow: React.FC<Props> = ({
       <div className="group -mx-2 flex items-center rounded p-1">
         <Link
           target="_blank"
-          href={bookmark.link}
+          href={bookmark.url}
           className="my-0 flex items-center gap-1 truncate p-1 text-sm text-slate-700 hover:text-slate-900"
         >
-          {bookmark.icon !== "" && (
-            <img src={bookmark.icon} alt={bookmark.title} className="w-4" />
+          {bookmark.image_url !== "" && (
+            <img
+              src={bookmark.image_url}
+              alt={bookmark.title}
+              className="w-4"
+            />
           )}
           <span>{bookmark.title}</span>
         </Link>
@@ -45,7 +49,7 @@ const BookmarkRow: React.FC<Props> = ({
             <button
               className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
               onClick={() => {
-                copyLink(bookmark.link)
+                copyLink(bookmark.url)
               }}
             >
               <Copy size={17} />
