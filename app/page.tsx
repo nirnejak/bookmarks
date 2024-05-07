@@ -38,7 +38,10 @@ const Home = async (): Promise<React.JSX.Element> => {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
 
-  const { data: bookmarks, error } = await supabase.from("bookmarks").select()
+  const { data: bookmarks, error } = await supabase
+    .from("bookmarks")
+    .select()
+    .order("created_at", { ascending: false })
 
   if (error) {
     console.log(error)
