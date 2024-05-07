@@ -18,6 +18,14 @@ interface Props {
 }
 
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
+  let supabase
+
+  React.useEffect(() => {
+    supabase = createClient()
+    return () => {
+      supabase = null
+    }
+  })
   const [url, setUrl] = React.useState("")
 
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
@@ -31,7 +39,6 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         return
       }
 
-      const supabase = createClient()
       const { data: newBookmark, error } = await supabase
         .from("bookmarks")
         .insert({
@@ -76,12 +83,24 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
     toast("Bookmark updated")
   }
 
-  const deleteBookmark = (id: number): void => {
-    setBookmarks((bookmarks) =>
-      bookmarks.filter((bookmark) => bookmark.id !== id)
+  const deleteBookmark = async (id: number): Promise<void> => {
+    // TODO: replace window.confirm with custom modal or hold to delete
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this bookmark?"
     )
-    toast("Bookmark deleted")
-    // TODO: Remove bookmark item from supabase
+    if (!isConfirmed) return
+
+    const { error } = await supabase.from("bookmarks").delete().eq("id", id)
+
+    if (error) {
+      console.log(error)
+      toast.error(error.message)
+    } else {
+      setBookmarks((bookmarks) =>
+        bookmarks.filter((bookmark) => bookmark.id !== id)
+      )
+      toast("Bookmark deleted")
+    }
   }
 
   return (
