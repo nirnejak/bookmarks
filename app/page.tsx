@@ -41,6 +41,8 @@ const Home = async (): Promise<React.JSX.Element> => {
   const { data: bookmarks, error } = await supabase.from("bookmarks").select()
 
   if (error) {
+    console.log(error)
+
     return <ErrorComponent type={500} />
   } else {
     return (
