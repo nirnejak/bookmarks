@@ -1,8 +1,8 @@
 import * as React from "react"
 
 import { type Metadata } from "next"
-
 import localFont from "next/font/local"
+import { Toaster } from "sonner"
 
 import classNames from "utils/classNames"
 
@@ -97,6 +97,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
         )}
       >
         {children}
+        <Toaster position="bottom-right" closeButton />
       </body>
     </html>
   )

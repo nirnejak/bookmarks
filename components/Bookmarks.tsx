@@ -3,7 +3,7 @@ import * as React from "react"
 
 import { Plus, Sort } from "akar-icons"
 import { motion, Reorder } from "framer-motion"
-import { Toaster } from "sonner"
+
 import { v4 as uuidv4 } from "uuid"
 
 import copyToClipboard from "utils/copyToClipboard"
@@ -121,7 +121,6 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
           </div>
         </motion.div>
       </section>
-      <Toaster position="bottom-right" closeButton />
     </>
   )
 }
