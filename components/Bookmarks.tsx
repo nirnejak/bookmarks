@@ -3,8 +3,8 @@ import * as React from "react"
 
 import { Plus, Sort } from "akar-icons"
 import { motion, Reorder } from "framer-motion"
-
 import { v4 as uuidv4 } from "uuid"
+import { toast } from "sonner"
 
 import copyToClipboard from "utils/copyToClipboard"
 import getUrlFavicon from "utils/getUrlFavicon"
@@ -55,12 +55,14 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   const editBookmark = (id: number): void => {
     // TODO: Update bookmark in local
     // TODO: Update bookmark item in supabase
+    toast("Bookmark updated")
   }
 
   const deleteBookmark = (id: number): void => {
     setBookmarks((bookmarks) =>
       bookmarks.filter((bookmark) => bookmark.id !== id)
     )
+    toast("Bookmark deleted")
     // TODO: Remove bookmark item from supabase
   }
 
