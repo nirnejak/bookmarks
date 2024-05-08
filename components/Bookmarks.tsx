@@ -19,16 +19,16 @@ interface Props {
 
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   let supabase
-
   React.useEffect(() => {
     supabase = createClient()
     return () => {
       supabase = null
     }
   })
-  const [url, setUrl] = React.useState("")
 
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
+  const [url, setUrl] = React.useState("")
+  const [sortField, setSortField] = React.useState("")
 
   const addBookmark = async (e: React.KeyboardEvent): Promise<void> => {
     if (e.key === "Enter") {
@@ -62,21 +62,6 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
     }
   }
 
-  const sortBookmarks = (): void => {
-    setBookmarks((bookmarks) => {
-      const sortedBookmarks = bookmarks
-      sortedBookmarks.sort((bk1, bk2) => {
-        if (bk1.title > bk2.title) {
-          return 1
-        } else if (bk1.title < bk2.title) {
-          return -1
-        }
-        return 0
-      })
-      return sortedBookmarks
-    })
-  }
-
   const editBookmark = (id: number): void => {
     // TODO: Update bookmark in local
     // TODO: Update bookmark item in supabase
@@ -102,6 +87,19 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
       toast("Bookmark deleted")
     }
   }
+
+  const sortedBookmarks = React.useMemo(() => {
+    const sortedBookmarks = bookmarks
+    sortedBookmarks.sort((bk1, bk2) => {
+      if (bk1[sortField] > bk2[sortField]) {
+        return 1
+      } else if (bk1[sortField] < bk2[sortField]) {
+        return -1
+      }
+      return 0
+    })
+    return sortedBookmarks
+  }, [bookmarks, sortField])
 
   return (
     <>
@@ -135,7 +133,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
               <button
                 className="-mr-1 ml-auto rounded p-1 hover:bg-slate-100"
                 onClick={() => {
-                  sortBookmarks()
+                  setSortField("title")
                 }}
               >
                 <Sort size={15} />
