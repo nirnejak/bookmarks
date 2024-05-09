@@ -1,11 +1,19 @@
 import * as React from "react"
+import { type Metadata } from "next"
 import { cookies } from "next/headers"
+
+import generateMetadata from "utils/seo"
+import { createClient } from "utils/supabase/server"
 
 import Bookmarks from "components/Bookmarks"
 import Footer from "components/Footer"
 import ErrorComponent from "components/ErrorComponent"
 
-import { createClient } from "utils/supabase/server"
+export const metadata: Metadata = generateMetadata({
+  path: "/",
+  title: "Bookmarks",
+  description: "An elegant bookmarking tool.",
+})
 
 const Home = async (): Promise<React.JSX.Element> => {
   const cookieStore = cookies()
