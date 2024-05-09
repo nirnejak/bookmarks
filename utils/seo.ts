@@ -2,7 +2,7 @@ import { type Metadata } from "next"
 
 export const BASE_URL = "https://bkmrks.vercel.app"
 
-https: interface MetadataArgs {
+interface MetadataArgs {
   path: string
   title: string
   description: string
