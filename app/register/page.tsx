@@ -1,8 +1,17 @@
 import * as React from "react"
+import { type Metadata } from "next"
 
-import RegisterForm from "@/components/RegisterForm"
+import generateMetadata from "utils/seo"
+
+import RegisterForm from "components/RegisterForm"
 
 interface Props {}
+
+export const metadata: Metadata = generateMetadata({
+  path: "/",
+  title: "Register | Bookmarks",
+  description: "Signup and get started on Bookmarks",
+})
 
 const RegisterPage: React.FC<Props> = () => {
   return (
