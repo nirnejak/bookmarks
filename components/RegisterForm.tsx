@@ -1,6 +1,8 @@
 "use client"
 import * as React from "react"
+import Link from "next/link"
 
+import { Info } from "akar-icons"
 import { toast } from "sonner"
 
 import { createClient } from "utils/supabase/client"
@@ -44,6 +46,7 @@ const RegisterForm: React.FC<Props> = () => {
       toast.error(error.message)
     } else {
       console.log(user)
+      toast("Successfully registered")
       setFormState(defaultFormState)
     }
   }
@@ -83,6 +86,17 @@ const RegisterForm: React.FC<Props> = () => {
       >
         Register
       </button>
+      <p className="text-sm mt-2 text-slate-500 flex gap-1 items-center">
+        <Info size={14} />
+        By proceeding with registration, you are agreeing to our{" "}
+        <Link
+          href={"/terms-and-conditions/"}
+          className="underline hover:text-slate-800"
+        >
+          terms and conditions
+        </Link>
+        .
+      </p>
     </form>
   )
 }
