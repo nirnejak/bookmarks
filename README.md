@@ -2,8 +2,6 @@
   An elegant bookmarking tool
 </h1>
 
----
-
 ## Available Scripts
 
 **Install Dependencies**
