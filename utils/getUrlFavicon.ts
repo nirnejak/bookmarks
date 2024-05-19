@@ -1,14 +1,5 @@
-// import urlMetadata from "url-metadata"
-
 const getUrlFavicon = (url): string => {
-  // return await urlMetadata(url, {
-  //   requestHeaders: {
-  //     "User-Agent": "foo",
-  //     From: email,
-  //   },
-  // })
-  // TODO: extract domain from url and then add '/favicon.ico'
-  return ""
+  return `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
 }
 
 export default getUrlFavicon
