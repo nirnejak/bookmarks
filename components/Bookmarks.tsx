@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid"
 import { toast } from "sonner"
 
 import copyToClipboard from "utils/copyToClipboard"
-import getUrlFavicon from "utils/getUrlFavicon"
+import getUrlMetadata from "utils/getUrlMetadata"
 import isValidURL from "utils/isValidURL"
 import { createClient } from "utils/supabase/client"
 
@@ -39,14 +39,21 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         return
       }
 
+      let payload = {
+        id: uuidv4(),
+        title: url,
+        url: url,
+        image_url: "",
+      }
+      setUrl("")
+
+      const { title, favicon } = await getUrlMetadata(payload.url)
+      payload.title = title
+      payload.image_url = favicon
+
       const { data: newBookmark, error } = await supabase
         .from("bookmarks")
-        .insert({
-          id: uuidv4(),
-          title: url,
-          url: url,
-          image_url: getUrlFavicon(url),
-        })
+        .insert(payload)
         .select()
 
       if (error) {
@@ -57,7 +64,6 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
           ...newBookmark,
           ...currentBookmarks,
         ])
-        setUrl("")
       }
     }
   }
