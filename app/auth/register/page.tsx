@@ -1,11 +1,9 @@
 import * as React from "react"
+
 import { type Metadata } from "next"
 
-import generateMetadata from "utils/seo"
-
 import RegisterForm from "components/RegisterForm"
-
-interface Props {}
+import generateMetadata from "utils/seo"
 
 export const metadata: Metadata = generateMetadata({
   path: "/",
@@ -13,11 +11,11 @@ export const metadata: Metadata = generateMetadata({
   description: "Signup and get started on Bookmarks",
 })
 
-const RegisterPage: React.FC<Props> = () => {
+const RegisterPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center">
       <div className="flex flex-col">
-        <p className="font-semibold mb-7">Register</p>
+        <p className="mb-7 font-semibold">Register</p>
         <RegisterForm />
       </div>
     </div>
