@@ -1,13 +1,14 @@
 import * as React from "react"
+
 import { type Metadata } from "next"
+
 import { cookies } from "next/headers"
 
+import Bookmarks from "components/Bookmarks"
+import ErrorComponent from "components/ErrorComponent"
+import Footer from "components/Footer"
 import generateMetadata from "utils/seo"
 import { createClient } from "utils/supabase/server"
-
-import Bookmarks from "components/Bookmarks"
-import Footer from "components/Footer"
-import ErrorComponent from "components/ErrorComponent"
 
 export const metadata: Metadata = generateMetadata({
   path: "/",
@@ -24,16 +25,14 @@ const Home = async (): Promise<React.JSX.Element> => {
     .select()
     .order("created_at", { ascending: false })
 
-  if (error) {
+  if (error !== null) {
     console.log(error)
 
     return <ErrorComponent type={500} />
   } else {
     return (
       <main>
-        <Bookmarks
-          defaultBookmarks={bookmarks && bookmarks.length ? bookmarks : []}
-        />
+        <Bookmarks defaultBookmarks={bookmarks} />
         <Footer />
       </main>
     )
