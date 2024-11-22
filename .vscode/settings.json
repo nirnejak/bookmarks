@@ -21,6 +21,7 @@
     "classname",
     "nextjs",
     "precommit",
+    "supabase",
     "tailwindcss",
     "uuidv"
   ]
