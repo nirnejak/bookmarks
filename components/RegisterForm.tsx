@@ -1,8 +1,8 @@
 "use client"
 import * as React from "react"
-import Link from "next/link"
 
 import { Info } from "akar-icons"
+import Link from "next/link"
 import { toast } from "sonner"
 
 import { createClient } from "utils/supabase/client"
@@ -19,10 +19,9 @@ const defaultFormState: IFormState = {
   password: "",
 }
 
-interface Props {}
+let supabase
 
-const RegisterForm: React.FC<Props> = () => {
-  let supabase
+const RegisterForm: React.FC = () => {
   React.useEffect(() => {
     supabase = createClient()
     return () => {
@@ -36,14 +35,16 @@ const RegisterForm: React.FC<Props> = () => {
     setFormState({ ...formState, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault()
 
     const { user, error } = await supabase.auth.signUp(formState)
 
-    if (error) {
+    if (error !== null) {
       console.log(error)
-      toast.error(error.message)
+      toast.error(error.message as string)
     } else {
       console.log(user)
       toast("Successfully registered")
@@ -54,7 +55,7 @@ const RegisterForm: React.FC<Props> = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2.5 min-w-[250px] mb-3.5"
+      className="mb-3.5 flex min-w-[250px] flex-col gap-2.5"
     >
       <input
         type="text"
@@ -62,7 +63,7 @@ const RegisterForm: React.FC<Props> = () => {
         placeholder="Enter Name"
         value={formState.name}
         onChange={handleChange}
-        className="px-3.5 py-2 bg-slate-100 rounded-md text-sm w-full focus:outline-0"
+        className="w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm focus:outline-0"
       />
       <input
         type="text"
@@ -70,7 +71,7 @@ const RegisterForm: React.FC<Props> = () => {
         placeholder="Enter Email"
         value={formState.email}
         onChange={handleChange}
-        className="px-3.5 py-2 bg-slate-100 rounded-md text-sm w-full focus:outline-0"
+        className="w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm focus:outline-0"
       />
       <input
         type="password"
@@ -78,15 +79,15 @@ const RegisterForm: React.FC<Props> = () => {
         placeholder="Enter Password"
         value={formState.password}
         onChange={handleChange}
-        className="px-3.5 py-2 bg-slate-100 rounded-md text-sm w-full focus:outline-0"
+        className="w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm focus:outline-0"
       />
       <button
         type="submit"
-        className="px-3.5 py-2 bg-slate-700 text-slate-100 rounded-md text-sm w-full focus:outline-0"
+        className="w-full rounded-md bg-slate-700 px-3.5 py-2 text-sm text-slate-100 focus:outline-0"
       >
         Register
       </button>
-      <p className="text-sm mt-2 text-slate-500 flex gap-1 items-center">
+      <p className="mt-2 flex items-center gap-1 text-sm text-slate-500">
         <Info size={14} />
         By proceeding with registration, you are agreeing to our{" "}
         <Link
