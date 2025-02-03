@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
 import { JSDOM } from "jsdom"
+import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
   const data = await request.json()
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     if (faviconElement) {
       favicon = faviconElement.getAttribute("href") || ""
       if (favicon && !favicon.startsWith("http")) {
-        const urlObject = new URL(url as string)
+        const urlObject = new URL(url)
         favicon = new URL(favicon, urlObject.origin).href
       }
     } else {
