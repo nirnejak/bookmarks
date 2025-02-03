@@ -11,11 +11,11 @@ const generalSans = localFont({
   variable: "--sans-font",
   src: [
     {
-      path: "../fonts/GeneralSans-Variable.ttf",
+      path: "../fonts/GeneralSans-Variable.woff2",
       style: "normal",
     },
     {
-      path: "../fonts/GeneralSans-VariableItalic.ttf",
+      path: "../fonts/GeneralSans-VariableItalic.woff2",
       style: "italic",
     },
   ],
