@@ -3,22 +3,22 @@ import * as React from "react"
 
 import { Plus, Sort } from "akar-icons"
 import { motion, Reorder } from "framer-motion"
-import { v4 as uuidv4 } from "uuid"
 import { toast } from "sonner"
+import { v4 as uuidv4 } from "uuid"
 
+import BookmarkRow from "components/BookmarkRow"
 import copyToClipboard from "utils/copyToClipboard"
 import getUrlMetadata from "utils/getUrlMetadata"
 import isValidURL from "utils/isValidURL"
 import { createClient } from "utils/supabase/client"
 
-import BookmarkRow from "components/BookmarkRow"
-
 interface Props {
   defaultBookmarks: any[]
 }
 
+let supabase
+
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
-  let supabase
   React.useEffect(() => {
     supabase = createClient()
     return () => {
@@ -39,10 +39,10 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         return
       }
 
-      let payload = {
+      const payload = {
         id: uuidv4(),
         title: url,
-        url: url,
+        url,
         image_url: "",
       }
       setUrl("")
@@ -56,9 +56,9 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         .insert(payload)
         .select()
 
-      if (error) {
+      if (error !== null) {
         console.log(error)
-        toast.error(error.message)
+        toast.error(error.message as string)
       } else {
         setBookmarks((currentBookmarks) => [
           ...newBookmark,
@@ -83,9 +83,9 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
 
     const { error } = await supabase.from("bookmarks").delete().eq("id", id)
 
-    if (error) {
+    if (error !== null) {
       console.log(error)
-      toast.error(error.message)
+      toast.error(error.message as string)
     } else {
       setBookmarks((bookmarks) =>
         bookmarks.filter((bookmark) => bookmark.id !== id)
@@ -108,60 +108,58 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
   }, [bookmarks, sortField])
 
   return (
-    <>
-      <section className="flex justify-center text-slate-700">
-        <motion.div
-          initial={{ opacity: 0, translateY: 20 }}
-          animate={{ opacity: 1, translateY: 0 }}
-          transition={{ duration: 0.15, type: "spring" }}
-          className="mx-auto mt-20 w-[500px] md:mt-40"
-        >
-          <h1 className="mb-3 font-semibold text-slate-700">Bookmarks</h1>
-          <div className="group relative flex items-center">
-            <Plus
-              size={15}
-              className="absolute left-3 z-10 text-slate-400 group-hover:text-slate-700"
-            />
-            <input
-              type="text"
-              value={url}
-              className="relative w-full rounded bg-slate-200/80 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
-              placeholder="Inset link..."
-              onChange={(e) => {
-                setUrl(e.target.value)
+    <section className="flex justify-center text-slate-700">
+      <motion.div
+        initial={{ opacity: 0, translateY: 20 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: 0.15, type: "spring" }}
+        className="mx-auto mt-20 w-[500px] md:mt-40"
+      >
+        <h1 className="mb-3 font-semibold text-slate-700">Bookmarks</h1>
+        <div className="group relative flex items-center">
+          <Plus
+            size={15}
+            className="absolute left-3 z-10 text-slate-400 group-hover:text-slate-700"
+          />
+          <input
+            type="text"
+            value={url}
+            className="relative w-full rounded bg-slate-200/80 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
+            placeholder="Inset link..."
+            onChange={(e) => {
+              setUrl(e.target.value)
+            }}
+            onKeyUp={addBookmark}
+          />
+        </div>
+        {bookmarks.length > 0 && (
+          <div className="mb-3 mt-10 flex items-center text-slate-500">
+            <p className="text-xs font-medium">Inbox</p>
+            <button
+              className="-mr-1 ml-auto rounded p-1 hover:bg-slate-100"
+              onClick={() => {
+                setSortField("title")
               }}
-              onKeyUp={addBookmark}
-            />
+            >
+              <Sort size={15} />
+            </button>
           </div>
-          {bookmarks.length > 0 && (
-            <div className="mb-3 mt-10 flex items-center text-slate-500">
-              <p className="text-xs font-medium">Inbox</p>
-              <button
-                className="-mr-1 ml-auto rounded p-1 hover:bg-slate-100"
-                onClick={() => {
-                  setSortField("title")
-                }}
-              >
-                <Sort size={15} />
-              </button>
-            </div>
-          )}
-          <div className="flex w-full select-none flex-col font-[450]">
-            <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>
-              {bookmarks.map((bookmark) => (
-                <BookmarkRow
-                  key={bookmark.id}
-                  bookmark={bookmark}
-                  copyLink={copyToClipboard}
-                  editBookmark={editBookmark}
-                  deleteBookmark={deleteBookmark}
-                />
-              ))}
-            </Reorder.Group>
-          </div>
-        </motion.div>
-      </section>
-    </>
+        )}
+        <div className="flex w-full select-none flex-col font-[450]">
+          <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>
+            {bookmarks.map((bookmark) => (
+              <BookmarkRow
+                key={bookmark.id}
+                bookmark={bookmark}
+                copyLink={copyToClipboard}
+                editBookmark={editBookmark}
+                deleteBookmark={deleteBookmark}
+              />
+            ))}
+          </Reorder.Group>
+        </div>
+      </motion.div>
+    </section>
   )
 }
 
