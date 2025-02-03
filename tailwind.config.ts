@@ -72,7 +72,7 @@ const config: Config = {
       },
     },
     fontFamily: {
-      sans: ["var(--font-general-sans)"],
+      sans: ["var(--sans-font)"],
     },
   },
   variants: {

@@ -8,7 +8,7 @@ import classNames from "utils/classNames"
 import "styles/main.css"
 
 const generalSans = localFont({
-  variable: "--font-general-sans",
+  variable: "--sans-font",
   src: [
     {
       path: "../fonts/GeneralSans-Variable.ttf",
