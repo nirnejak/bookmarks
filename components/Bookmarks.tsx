@@ -94,19 +94,6 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
     }
   }
 
-  const sortedBookmarks = React.useMemo(() => {
-    const sortedBookmarks = bookmarks
-    sortedBookmarks.sort((bk1, bk2) => {
-      if (bk1[sortField] > bk2[sortField]) {
-        return 1
-      } else if (bk1[sortField] < bk2[sortField]) {
-        return -1
-      }
-      return 0
-    })
-    return sortedBookmarks
-  }, [bookmarks, sortField])
-
   return (
     <section className="flex justify-center text-slate-700">
       <motion.div
