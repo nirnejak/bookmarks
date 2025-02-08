@@ -28,13 +28,7 @@ interface Props {
 const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html lang="en">
-      <head>
-        <script
-          defer
-          data-domain="bkmrks.vercel.app"
-          src="https://plausible.io/js/script.js"
-        />
-      </head>
+      <head></head>
       <body
         className={classNames(
           generalSans.variable,
