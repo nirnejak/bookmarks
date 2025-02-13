@@ -1,8 +1,5 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  swcMinify: true,
-  trailingSlash: true,
-  reactStrictMode: true,
-}
+import type { NextConfig } from "next"
+
+const nextConfig: NextConfig = { trailingSlash: true, reactStrictMode: true }
 
 export default nextConfig
