@@ -10,6 +10,12 @@
 bun install
 ```
 
+**Setup Pre-commit**
+
+```bash
+bun run prepare
+```
+
 **Start Development Server**
 
 ```bash
