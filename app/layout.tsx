@@ -5,13 +5,21 @@ import { Toaster } from "sonner"
 
 import classNames from "@/utils/classNames"
 
-import "styles/main.css"
+import "@/styles/main.css"
 
 const generalSans = localFont({
   variable: "--sans-font",
   src: [
-    { path: "../fonts/GeneralSans-Variable.woff2", style: "normal" },
-    { path: "../fonts/GeneralSans-VariableItalic.woff2", style: "italic" },
+    {
+      path: "../fonts/GeneralSans-Variable.woff2",
+      weight: "300 800",
+      style: "normal",
+    },
+    {
+      path: "../fonts/GeneralSans-VariableItalic.woff2",
+      weight: "300 800",
+      style: "italic",
+    },
   ],
 })
 
