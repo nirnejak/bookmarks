@@ -7,7 +7,7 @@ import classNames from "@/utils/classNames"
 
 import "@/styles/main.css"
 
-const generalSans = localFont({
+const sansFont = localFont({
   variable: "--sans-font",
   src: [
     {
@@ -33,7 +33,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
       <head></head>
       <body
         className={classNames(
-          generalSans.variable,
+          sansFont.variable,
           "overflow-x-hidden bg-slate-50"
         )}
       >
