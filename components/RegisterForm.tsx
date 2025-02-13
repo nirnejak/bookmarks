@@ -5,7 +5,7 @@ import { Info } from "akar-icons"
 import Link from "next/link"
 import { toast } from "sonner"
 
-import { createClient } from "utils/supabase/client"
+import { createClient } from "@/utils/supabase/client"
 
 interface IFormState {
   name: string
@@ -13,11 +13,7 @@ interface IFormState {
   password: string
 }
 
-const defaultFormState: IFormState = {
-  name: "",
-  email: "",
-  password: "",
-}
+const defaultFormState: IFormState = { name: "", email: "", password: "" }
 
 let supabase
 

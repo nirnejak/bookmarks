@@ -2,8 +2,8 @@ import * as React from "react"
 
 import { type Metadata } from "next"
 
-import RegisterForm from "components/RegisterForm"
-import generateMetadata from "utils/seo"
+import RegisterForm from "@/components/RegisterForm"
+import generateMetadata from "@/utils/seo"
 
 export const metadata: Metadata = generateMetadata({
   path: "/",

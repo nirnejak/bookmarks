@@ -6,11 +6,11 @@ import { motion, Reorder } from "framer-motion"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
-import BookmarkRow from "components/BookmarkRow"
-import copyToClipboard from "utils/copyToClipboard"
-import getUrlMetadata from "utils/getUrlMetadata"
-import isValidURL from "utils/isValidURL"
-import { createClient } from "utils/supabase/client"
+import BookmarkRow from "@/components/BookmarkRow"
+import copyToClipboard from "@/utils/copyToClipboard"
+import getUrlMetadata from "@/utils/getUrlMetadata"
+import isValidURL from "@/utils/isValidURL"
+import { createClient } from "@/utils/supabase/client"
 
 interface Props {
   defaultBookmarks: any[]
@@ -39,12 +39,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         return
       }
 
-      const payload = {
-        id: uuidv4(),
-        title: url,
-        url,
-        image_url: "",
-      }
+      const payload = { id: uuidv4(), title: url, url, image_url: "" }
       setUrl("")
 
       const { title, favicon } = await getUrlMetadata(payload.url)

@@ -4,11 +4,11 @@ import { type Metadata } from "next"
 
 import { cookies } from "next/headers"
 
-import Bookmarks from "components/Bookmarks"
-import ErrorComponent from "components/ErrorComponent"
-import Footer from "components/Footer"
-import generateMetadata from "utils/seo"
-import { createClient } from "utils/supabase/server"
+import Bookmarks from "@/components/Bookmarks"
+import ErrorComponent from "@/components/ErrorComponent"
+import Footer from "@/components/Footer"
+import generateMetadata from "@/utils/seo"
+import { createClient } from "@/utils/supabase/server"
 
 export const metadata: Metadata = generateMetadata({
   path: "/",
