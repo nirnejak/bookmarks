@@ -106,7 +106,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
           <input
             type="text"
             value={url}
-            className="relative w-full rounded bg-slate-200/80 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-none"
+            className="relative w-full rounded-sm bg-slate-200/80 py-2.5 pl-8 pr-3 text-sm text-slate-700 focus:outline-hidden"
             placeholder="Inset link..."
             onChange={(e) => {
               setUrl(e.target.value)
@@ -118,7 +118,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
           <div className="mb-3 mt-10 flex items-center text-slate-500">
             <p className="text-xs font-medium">Inbox</p>
             <button
-              className="-mr-1 ml-auto rounded p-1 hover:bg-slate-100"
+              className="-mr-1 ml-auto rounded-sm p-1 hover:bg-slate-100"
               onClick={() => {
                 setSortField("title")
               }}

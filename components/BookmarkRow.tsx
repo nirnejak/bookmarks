@@ -29,7 +29,7 @@ const BookmarkRow: React.FC<Props> = ({
       dragListener={false}
       dragControls={dragControls}
     >
-      <div className="group -mx-2 flex items-center rounded p-1">
+      <div className="group -mx-2 flex items-center rounded-sm p-1">
         <Link
           target="_blank"
           href={bookmark.url}
@@ -47,7 +47,7 @@ const BookmarkRow: React.FC<Props> = ({
         <div className="ml-auto flex items-center gap-2">
           <div className="hidden group-hover:flex">
             <button
-              className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
+              className="rounded-sm p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
               onClick={() => {
                 copyLink(bookmark.url)
               }}
@@ -55,7 +55,7 @@ const BookmarkRow: React.FC<Props> = ({
               <Copy size={17} />
             </button>
             <button
-              className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
+              className="rounded-sm p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
               onClick={() => {
                 editBookmark(bookmark.id)
               }}
@@ -63,7 +63,7 @@ const BookmarkRow: React.FC<Props> = ({
               <Pencil size={17} />
             </button>
             <button
-              className="rounded p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
+              className="rounded-sm p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
               onClick={() => {
                 deleteBookmark(bookmark.id)
               }}
