@@ -2,7 +2,7 @@
 import * as React from "react"
 
 import { Pencil, TrashBin, DragVerticalFill, Copy } from "akar-icons"
-import { Reorder, useDragControls, useMotionValue } from "framer-motion"
+import { Reorder, useDragControls, useMotionValue } from "motion/react"
 import Link from "next/link"
 
 interface Props {

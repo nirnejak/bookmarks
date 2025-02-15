@@ -2,7 +2,7 @@
 import * as React from "react"
 
 import { Plus, Sort } from "akar-icons"
-import { motion, Reorder } from "framer-motion"
+import { motion, Reorder } from "motion/react"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
