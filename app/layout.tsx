@@ -29,14 +29,9 @@ interface Props {
 
 const RootLayout: React.FC<Props> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="en" className={classNames(sansFont.variable)}>
       <head></head>
-      <body
-        className={classNames(
-          sansFont.variable,
-          "overflow-x-hidden bg-slate-50"
-        )}
-      >
+      <body className="overflow-x-hidden bg-slate-50">
         {children}
         <Toaster position="bottom-right" closeButton />
       </body>
