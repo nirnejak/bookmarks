@@ -28,9 +28,9 @@ const ErrorComponent: React.FC<Props> = ({ type }) => {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="text-center ">
+      <div className="text-center">
         <h1 className="mb-1 font-semibold text-slate-700">{content.title}</h1>
-        <p className="text-slate-500 text-xs">{content.description}</p>
+        <p className="text-xs text-slate-500">{content.description}</p>
       </div>
     </div>
   )

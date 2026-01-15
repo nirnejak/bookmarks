@@ -1,8 +1,10 @@
 import { toast } from "sonner"
 
-const copyToClipboard = (link): void => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const copyToClipboard = (link: any): void => {
   navigator.clipboard
     .writeText(link)
+    // eslint-disable-next-line promise/always-return
     .then(() => {
       toast("Copied to clipboard")
     })

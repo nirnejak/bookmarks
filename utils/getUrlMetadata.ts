@@ -12,6 +12,7 @@ const getUrlMetadata = async (
 
     return { title, favicon }
   } catch (err) {
+    console.error("Error fetching URL metadata:", err)
     return { title: url, favicon: fallbackFaviconUrl }
   }
 }

@@ -59,7 +59,10 @@ const RegisterForm: React.FC = () => {
         placeholder="Enter Name"
         value={formState.name}
         onChange={handleChange}
-        className="w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm focus:outline-0"
+        className="
+          w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm
+          focus:outline-0
+        "
       />
       <input
         type="text"
@@ -67,7 +70,10 @@ const RegisterForm: React.FC = () => {
         placeholder="Enter Email"
         value={formState.email}
         onChange={handleChange}
-        className="w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm focus:outline-0"
+        className="
+          w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm
+          focus:outline-0
+        "
       />
       <input
         type="password"
@@ -75,11 +81,17 @@ const RegisterForm: React.FC = () => {
         placeholder="Enter Password"
         value={formState.password}
         onChange={handleChange}
-        className="w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm focus:outline-0"
+        className="
+          w-full rounded-md bg-slate-100 px-3.5 py-2 text-sm
+          focus:outline-0
+        "
       />
       <button
         type="submit"
-        className="w-full rounded-md bg-slate-700 px-3.5 py-2 text-sm text-slate-100 focus:outline-0"
+        className="
+          w-full rounded-md bg-slate-700 px-3.5 py-2 text-sm text-slate-100
+          focus:outline-0
+        "
       >
         Register
       </button>
@@ -88,7 +100,10 @@ const RegisterForm: React.FC = () => {
         By proceeding with registration, you are agreeing to our{" "}
         <Link
           href={"/terms-and-conditions/"}
-          className="underline hover:text-slate-800"
+          className="
+            underline
+            hover:text-slate-800
+          "
         >
           terms and conditions
         </Link>
