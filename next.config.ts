@@ -1,5 +1,9 @@
 import type { NextConfig } from "next"
 
-const nextConfig: NextConfig = { trailingSlash: true, reactStrictMode: true }
+const nextConfig: NextConfig = {
+  reactCompiler: true,
+  trailingSlash: true,
+  reactStrictMode: true,
+}
 
 export default nextConfig
