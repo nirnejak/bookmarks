@@ -5,7 +5,7 @@ import { Toaster } from "sonner"
 
 import classNames from "@/utils/classNames"
 
-import "@/styles/main.css"
+import "./main.css"
 
 const sansFont = localFont({
   variable: "--sans-font",
