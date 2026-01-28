@@ -5,8 +5,6 @@ import { Info } from "akar-icons"
 import Link from "next/link"
 import { toast } from "sonner"
 
-import { createClient } from "@/utils/supabase/client"
-
 interface IFormState {
   name: string
   email: string
@@ -15,16 +13,7 @@ interface IFormState {
 
 const defaultFormState: IFormState = { name: "", email: "", password: "" }
 
-let supabase
-
 const RegisterForm: React.FC = () => {
-  React.useEffect(() => {
-    supabase = createClient()
-    return () => {
-      supabase = null
-    }
-  })
-
   const [formState, setFormState] = React.useState<IFormState>(defaultFormState)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +25,9 @@ const RegisterForm: React.FC = () => {
   ): Promise<void> => {
     e.preventDefault()
 
-    const { user, error } = await supabase.auth.signUp(formState)
+    // TODO: signup user with better auth
+    const error = { message: "Registration failed " } // TODO: replace with actual error from signup operation
+    const user = { id: 1, ...formState } // TODO: replace with actual user from signup operation
 
     if (error !== null) {
       console.log(error)
@@ -51,7 +42,7 @@ const RegisterForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-3.5 flex min-w-[250px] flex-col gap-2.5"
+      className="mb-3.5 flex min-w-62.5 flex-col gap-2.5"
     >
       <input
         type="text"

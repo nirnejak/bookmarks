@@ -10,24 +10,13 @@ import BookmarkRow from "@/components/BookmarkRow"
 import copyToClipboard from "@/utils/copyToClipboard"
 import getUrlMetadata from "@/utils/getUrlMetadata"
 import isValidURL from "@/utils/isValidURL"
-import { createClient } from "@/utils/supabase/client"
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultBookmarks: any[]
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let supabase: any = null
-
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
-  React.useEffect(() => {
-    supabase = createClient()
-    return () => {
-      supabase = null
-    }
-  })
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
   const [url, setUrl] = React.useState("")
@@ -50,26 +39,13 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
       payload.title = title
       payload.image_url = favicon
 
-      const { data: newBookmark, error } = await supabase
-        .from("bookmarks")
-        .insert(payload)
-        .select()
-
-      if (error !== null) {
-        console.log(error)
-        toast.error(error.message as string)
-      } else {
-        setBookmarks((currentBookmarks) => [
-          ...newBookmark,
-          ...currentBookmarks,
-        ])
-      }
+      // add bookmark to database
     }
   }
 
   const editBookmark = (id: number): void => {
     // TODO: Update bookmark in local
-    // TODO: Update bookmark item in supabase
+    // TODO: Update bookmark item in database
     console.log(id)
     toast("Bookmark updated")
   }
@@ -81,7 +57,8 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
     )
     if (!isConfirmed) return
 
-    const { error } = await supabase.from("bookmarks").delete().eq("id", id)
+    // TODO: Delete bookmark from database
+    const error = { message: "Failed to delete bookmark" } // TODO: replace with actual error from database operation
 
     if (error !== null) {
       console.log(error)
