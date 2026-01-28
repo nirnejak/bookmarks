@@ -16,8 +16,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.8.0",
-    "@supabase/supabase-js": "^2.91.1",
     "akar-icons": "^1.9.31",
     "dotenv": "^17.2.3",
     "jsdom": "^27.4.0",
