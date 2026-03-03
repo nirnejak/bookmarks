@@ -1,6 +1,5 @@
-import * as React from "react"
-
 import localFont from "next/font/local"
+import type * as React from "react"
 import { Toaster } from "sonner"
 
 import classNames from "@/utils/classNames"

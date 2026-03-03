@@ -1,8 +1,7 @@
-import * as React from "react"
-import { type Metadata } from "next"
+import type { Metadata } from "next"
+import type * as React from "react"
 
 import Bookmarks from "@/components/Bookmarks"
-import ErrorComponent from "@/components/ErrorComponent"
 import Footer from "@/components/Footer"
 import generateMetadata from "@/utils/seo"
 

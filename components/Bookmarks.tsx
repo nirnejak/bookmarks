@@ -1,8 +1,8 @@
 "use client"
-import * as React from "react"
 
 import { Plus, Sort } from "akar-icons"
 import { motion, Reorder } from "motion/react"
+import * as React from "react"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
@@ -12,16 +12,15 @@ import getUrlMetadata from "@/utils/getUrlMetadata"
 import isValidURL from "@/utils/isValidURL"
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: type bookmarks properly
   defaultBookmarks: any[]
 }
 
 const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: type bookmarks properly
   const [bookmarks, setBookmarks] = React.useState<any[]>(defaultBookmarks)
   const [url, setUrl] = React.useState("")
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [sortField, setSortField] = React.useState("")
+  const [_sortField, setSortField] = React.useState("")
 
   const addBookmark = async (e: React.KeyboardEvent): Promise<void> => {
     if (e.key === "Enter") {
@@ -77,28 +76,18 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         initial={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ duration: 0.15, type: "spring" }}
-        className="
-          mx-auto mt-20 w-125
-          md:mt-40
-        "
+        className="mx-auto mt-20 w-125 md:mt-40"
       >
         <h1 className="mb-3 font-semibold text-slate-700">Bookmarks</h1>
         <div className="group relative flex items-center">
           <Plus
             size={15}
-            className="
-              absolute left-3 z-10 text-slate-400
-              group-hover:text-slate-700
-            "
+            className="absolute left-3 z-10 text-slate-400 group-hover:text-slate-700"
           />
           <input
             type="text"
             value={url}
-            className="
-              relative w-full rounded-sm bg-slate-200/80 py-2.5 pr-3 pl-8
-              text-sm text-slate-700
-              focus:outline-hidden
-            "
+            className="relative w-full rounded-sm bg-slate-200/80 py-2.5 pr-3 pl-8 text-slate-700 text-sm focus:outline-hidden"
             placeholder="Inset link..."
             onChange={(e) => {
               setUrl(e.target.value)
@@ -108,12 +97,10 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
         </div>
         {bookmarks.length > 0 && (
           <div className="mt-10 mb-3 flex items-center text-slate-500">
-            <p className="text-xs font-medium">Inbox</p>
+            <p className="font-medium text-xs">Inbox</p>
             <button
-              className="
-                -mr-1 ml-auto rounded-sm p-1
-                hover:bg-slate-100
-              "
+              type="button"
+              className="-mr-1 ml-auto rounded-sm p-1 hover:bg-slate-100"
               onClick={() => {
                 setSortField("title")
               }}
@@ -122,7 +109,7 @@ const Bookmarks: React.FC<Props> = ({ defaultBookmarks }) => {
             </button>
           </div>
         )}
-        <div className="flex w-full flex-col font-[450] select-none">
+        <div className="flex w-full select-none flex-col font-[450]">
           <Reorder.Group axis="y" values={bookmarks} onReorder={setBookmarks}>
             {bookmarks.map((bookmark) => (
               <BookmarkRow

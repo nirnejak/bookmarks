@@ -1,13 +1,13 @@
 "use client"
-import * as React from "react"
 
-import { Pencil, TrashBin, DragVerticalFill, Copy } from "akar-icons"
+import { Copy, DragVerticalFill, Pencil, TrashBin } from "akar-icons"
 import { Reorder, useDragControls, useMotionValue } from "motion/react"
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
+import type * as React from "react"
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: type bookmarks properly
   bookmark: any
   copyLink: (link: string) => void
   editBookmark: (id: number) => void
@@ -35,10 +35,7 @@ const BookmarkRow: React.FC<Props> = ({
         <Link
           target="_blank"
           href={bookmark.url}
-          className="
-            my-0 flex items-center gap-1 truncate p-1 text-sm text-slate-700
-            hover:text-slate-900
-          "
+          className="my-0 flex items-center gap-1 truncate p-1 text-slate-700 text-sm hover:text-slate-900"
         >
           {bookmark.image_url !== "" && (
             <Image
@@ -50,17 +47,10 @@ const BookmarkRow: React.FC<Props> = ({
           <span>{bookmark.title}</span>
         </Link>
         <div className="ml-auto flex items-center gap-2">
-          <div
-            className="
-              hidden
-              group-hover:flex
-            "
-          >
+          <div className="hidden group-hover:flex">
             <button
-              className="
-                rounded-sm p-1 text-slate-400 transition-colors
-                hover:bg-slate-200 hover:text-slate-600
-              "
+              type="button"
+              className="rounded-sm p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
               onClick={() => {
                 copyLink(bookmark.url)
               }}
@@ -68,10 +58,8 @@ const BookmarkRow: React.FC<Props> = ({
               <Copy size={17} />
             </button>
             <button
-              className="
-                rounded-sm p-1 text-slate-400 transition-colors
-                hover:bg-slate-200 hover:text-slate-600
-              "
+              type="button"
+              className="rounded-sm p-1 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-600"
               onClick={() => {
                 editBookmark(bookmark.id)
               }}
@@ -79,10 +67,8 @@ const BookmarkRow: React.FC<Props> = ({
               <Pencil size={17} />
             </button>
             <button
-              className="
-                rounded-sm p-1 text-red-400 transition-colors
-                hover:bg-red-100 hover:text-red-600
-              "
+              type="button"
+              className="rounded-sm p-1 text-red-400 transition-colors hover:bg-red-100 hover:text-red-600"
               onClick={() => {
                 deleteBookmark(bookmark.id)
               }}
@@ -92,7 +78,7 @@ const BookmarkRow: React.FC<Props> = ({
           </div>
           <div
             className="cursor-grab text-slate-400"
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // biome-ignore lint/suspicious/noExplicitAny: motion style type mismatch
             style={style as any}
             onPointerDown={(e) => {
               dragControls.start(e)
