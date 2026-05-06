@@ -17,28 +17,28 @@
   },
   "dependencies": {
     "akar-icons": "^1.9.31",
-    "dotenv": "^17.3.1",
-    "jsdom": "^28.1.0",
-    "motion": "^12.34.4",
-    "next": "^16.1.6",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "dotenv": "^17.4.2",
+    "jsdom": "^29.1.1",
+    "motion": "^12.38.0",
+    "next": "^16.2.5",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "sharp": "^0.34.5",
     "sonner": "^2.0.7",
     "use-sound": "^5.0.0",
-    "uuid": "^13.0.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
-    "@types/jsdom": "^28.0.0",
-    "@types/node": "^25.3.3",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/jsdom": "^28.0.1",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "babel-plugin-react-compiler": "^1.0.0",
-    "@biomejs/biome": "2.4.5",
+    "@biomejs/biome": "2.4.14",
     "husky": "^9.1.7",
-    "lint-staged": "^16.3.1",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3"
+    "lint-staged": "^17.0.2",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^6.0.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css}": "biome check --fix --no-errors-on-unmatched"
